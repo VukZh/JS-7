@@ -1,0 +1,39 @@
+var param;
+
+function series() {
+    let i = 0;
+    let res = [];
+    while (i < arguments.length - 1) {
+        if (param > 5) {
+            i++;
+            arguments[i - 1]();
+            res.push(arguments[i - 1]())
+        } else {
+            i++;
+            return arguments[arguments.length - 1]();
+        }
+    }
+    res.push(arguments[i]());
+    return res;
+};
+
+var s1 = () => (5);
+var s2 = () => (10);
+var s3 = () => (15);
+var s4 = () => ('FuncEnd');
+
+
+
+describe('Check series func', () => {
+    test('array', () => {
+        param = 6;
+        expect(series(s1, s2, s3, s4))
+            .toEqual([5, 10, 15, "FuncEnd"]);
+    });
+
+    test('is last', () => {
+        param = 1;
+        expect(series(s1, s2, s3, s4))
+            .toBe('FuncEnd');
+    });
+});

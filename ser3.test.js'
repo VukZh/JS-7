@@ -1,0 +1,36 @@
+var param;
+var series = (s) => {
+    return s(param)
+};
+var s1 = () => {
+    if (param > 10) {
+        return s2()
+    } else {
+        return sEnd()
+    }
+};
+var s2 = () => {
+    if (param > 20) {
+        return next()
+    } else {
+        return sEnd()
+    }
+};
+var next = () => ('next func');
+var sEnd = () => ('last func');
+
+
+
+describe('Check series func', () => {
+    test('is next', () => {
+        param = 21;
+        expect(series(s1))
+            .toBe('next func');
+    });
+
+    test('is last', () => {
+        param = 1;
+        expect(series(s1))
+            .toBe('last func');
+    });
+});
